@@ -1,0 +1,39 @@
+from typing import overload
+
+from jaxtyping import Array
+from pydantic import validate_call
+
+import sax
+
+__all__ = [
+    "block_diag",
+    "get_mode",
+    "get_modes",
+    "get_port_combinations",
+    "get_ports",
+    "reciprocal",
+    "scoo",
+    "sdense",
+    "sdict",
+]
+
+@overload
+def sdict(S: sax.Model) -> sax.SDictModel: ...
+@overload
+def sdict(S: sax.SType) -> sax.SDict: ...
+@overload
+def scoo(S: sax.Model) -> sax.SCooModel: ...
+@overload
+def scoo(S: sax.SType) -> sax.SCoo: ...
+@overload
+def sdense(S: sax.Model) -> sax.SDenseModel: ...
+@overload
+def sdense(S: sax.SType) -> sax.SDense: ...
+def reciprocal(sdict: sax.SDict) -> sax.SDict: ...
+def block_diag(*arrs: Array) -> Array: ...
+def get_ports(S: sax.SType) -> tuple[sax.Port, ...] | tuple[sax.PortMode]: ...
+@validate_call
+def get_modes(S: sax.STypeMM) -> tuple[sax.Mode, ...]: ...
+@validate_call
+def get_mode(pm: sax.PortMode) -> sax.Mode: ...
+def get_port_combinations(S: sax.Model | sax.SType) -> tuple[tuple[str, str], ...]: ...

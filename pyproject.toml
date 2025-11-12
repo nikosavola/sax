@@ -182,6 +182,9 @@ convention = "google"
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.setuptools.package-data]
+sax = ["py.typed", "*.pyi", "**/*.pyi"]
+
 [tool.tbump]
 
 [[tool.tbump.file]]

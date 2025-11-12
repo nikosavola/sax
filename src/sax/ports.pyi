@@ -1,0 +1,29 @@
+from typing import TypeAlias
+
+from _typeshed import Incomplete
+
+import sax
+
+PortNamingStrategy: TypeAlias
+PORT_NAMING_STRATEGY: PortNamingStrategy
+
+def set_port_naming_strategy(strategy: PortNamingStrategy) -> PortNamingStrategy: ...
+def get_port_naming_strategy() -> PortNamingStrategy: ...
+
+class PortNamer:
+    num_inputs: Incomplete
+    num_outputs: Incomplete
+    num_ports: Incomplete
+    strategy: Incomplete
+    def __init__(
+        self,
+        num_inputs: int,
+        num_outputs: int,
+        strategy: PortNamingStrategy | None = None,
+    ) -> None: ...
+    def __getattr__(self, attr: str) -> sax.Name: ...
+    def __getitem__(self, idx: int) -> sax.Name: ...
+    def is_input_port(self, port: sax.Name) -> bool: ...
+    def is_output_port(self, port: sax.Name) -> bool: ...
+    def is_input_port_idx(self, idx: int) -> bool: ...
+    def is_output_port_idx(self, idx: int) -> bool: ...
