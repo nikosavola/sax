@@ -1,0 +1,26 @@
+from collections.abc import Callable
+from typing import Any, TypeVar, overload
+
+__all__ = ["into", "try_into"]
+
+T = TypeVar("T")
+
+class Into(type):
+    @overload
+    def __getitem__(cls, key: type[T]) -> Callable[..., T]: ...
+    @overload
+    def __getitem__(cls, key: str) -> Callable[..., Any]: ...
+    @overload
+    def __getitem__(cls, key: Any) -> Callable[..., Any]: ...
+
+class into(metaclass=Into): ...
+
+class TryInto(type):
+    @overload
+    def __getitem__(cls, key: type[T]) -> Callable[..., T | None]: ...
+    @overload
+    def __getitem__(cls, key: str) -> Callable[..., Any | None]: ...
+    @overload
+    def __getitem__(cls, key: Any) -> Callable[..., Any | None]: ...
+
+class try_into(metaclass=TryInto): ...
