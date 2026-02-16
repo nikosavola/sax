@@ -95,6 +95,10 @@ def analyze_circuit_klu(
         analyzed = analyze_circuit_klu(analyzed_instances, nets, ports)
         ```
     """
+    if isinstance(nets, dict):
+        nets = [{"p1": k, "p2": v} for k, v in nets.items()]
+    nets = sax.into[sax.Nets](nets)
+
     inverse_ports = {v: k for k, v in ports.items()}
     port_map = {k: i for i, k in enumerate(ports)}
 

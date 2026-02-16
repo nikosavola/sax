@@ -331,6 +331,8 @@ def _connections_to_nets(connections: sax.Connections) -> sax.Nets:
 
 
 def _nets_to_connections_strict(nets: sax.Nets) -> sax.Connections:
+    if isinstance(nets, dict):
+        nets = _connections_to_nets(nets)
     connections: sax.Connections = {}
     seen: set[str] = set()
     for net in nets:
